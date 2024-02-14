@@ -15,6 +15,7 @@
         <div class="weather">
             <img src="images/rain.png" class="weather-icon">
             <h1 class="temp">22°C</h1>
+            <h2 class="city">New York</h2>
             <div class="details">
                 <div class="col">
                     <img src="images/humidity.png">
@@ -26,7 +27,7 @@
                 <div class="col">
                     <img src="images/wind.png">
                     <div>
-                        <p class="humidity">15 Km/h</p>
+                        <p class="wind">15 Km/h</p>
                             <p>Wind Speed</p>
                     </div>
                 </div>
@@ -36,9 +37,23 @@
     </div>
 
 <script>
-    const apiKey = "746b155869b651721f0a1dcdfc4a6a9f";
-    const apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=berlin&appid=&units=metric";
+const apiKey = "746b155869b651721f0a1dcdfc4a6a9f";
+const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=vancouver";
     
+async function checkWeather(){
+    const response = await fetch(apiUrl + `&appid=${apiKey}`);
+    var data = await response.json();
+
+    console.log(data);
+    document.querySelector('.city').innerHTML = data.name;
+    document.querySelector('.temp').innerHTML = data.main.temp + "°c" ;
+    document.querySelector('.humidity').innerHTML = data.main.humidity + "%";
+    document.querySelector('.wind').innerHTML = data.wind.speed + "Km/h";
+
+
+}
+    
+checkWeather();
 </script>
 
   </body>
